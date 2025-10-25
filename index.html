@@ -13,11 +13,14 @@
             padding: 20px;
             background: linear-gradient(135deg, darkgreen, teal);
             min-height: 100vh;
+            color:white;
         }
 
         h1 {
             font-size: 24px;
             margin-bottom: 20px;
+            
+        
         }
 
 
@@ -53,6 +56,8 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: white;
+            color:black;
         }
 
         .delete-btn {
@@ -61,6 +66,20 @@
             border: 1px solid black;
             background: white;
             cursor: pointer;
+        }
+        .completed {
+            text-decoration: line-through;
+            color: gray;
+        
+        
+        }
+        #motivation {
+            margin-top: 15px;
+            font-style: italic;
+            font-size: 14px;
+            text-align: center;
+            color: #fdfdfd;
+        
         }
     </style>
 </head>
@@ -75,12 +94,23 @@
 
 
     <ul id="todoList"></ul>
+    <p id=""motivation"></p>
 
     <script>
 
-        const todoInput sc = document.getElementById('todoInput');
+        const todoInput  = document.getElementById('todoInput');
         const addButton = document.getElementById('addButton');
         const todoList = document.getElementById('todoList');
+        const motivation = document.getElementById('motivation');
+        const messages = [
+            "You're doing great! 💪",
+            "one step closer to your goals!🚀",
+            "keep it up, champion!🏆",
+            "small progress is still progress🌱",
+            "you got this!🙌",
+            "Every task done is a victory🏅"
+
+        ];
 
         function addTodo() {
             const taskText = todoInput.value.trim();
@@ -94,6 +124,9 @@
 
             const taskSpan = document.createElement('span');
             taskSpan.textContent = taskText;
+            taskSpan.addEventListener('click',function() {
+                taskSpan.classList.toggle('completed');
+            }) 
 
             const deleteBtn = document.createElement('button');
             deleteBtn.textContent = 'Delete';
@@ -107,6 +140,8 @@
             li.appendChild(deleteBtn);
 
             todoList.appendChild(li);
+            const randomMsg = messages[Math.floor(Math.random() *messages.length)];
+            motivation.textContent=randomMsg;
 
             todoInput.value = '';
 
